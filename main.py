@@ -42,10 +42,8 @@ def send_slack_notification(target_df, total_capital):
     rows = []
     for _, r in target_df.iterrows():
         rows.append(
-            f"• *#{r['Rank']} {r['Ticker']}* ({r['Sector']}) | "
-            f"Weight: *{r['Target_Weight_%']}%* (~${r['Target_Value_$']:,.0f}) | "
-            f"Price: ${r['Latest_Price']:.2f} | "
-            f"6M Mom: *+{r['6M_Momentum_%']}%*"
+            f"• *#{r['Rank']} {r['Ticker']}* | "
+            f"Weight: *{r['Target_Weight_%']}%* | "
         )
     positions_str = "\n".join(rows)
 
@@ -176,7 +174,7 @@ def run_rebalance_function(request):
         res_df['Rank'] = res_df.index + 1
 
         # Calculate exponential weights based on 6M Momentum
-        raw_w = res_df['6M_Momentum_%'] ** 1.5
+        raw_w = res_df['6M_Momentum_%'] ** 1
         res_df['Target_Weight_%'] = ((raw_w / raw_w.sum()) * 100.0).round(2)
         res_df['Target_Value_$'] = (total_capital * (res_df['Target_Weight_%'] / 100.0)).round(2)
 
