@@ -125,7 +125,8 @@ def select_portfolio_candidates(close_prices, sp_df, as_of_date):
 
 def send_slack_notification(message):
     """Sends notification to Slack using proper JSON payload structure to prevent 400 errors."""
-    webhook_url = os.environ.get("SLACK_WEBHOOK_URL", "https://hooks.slack.com/services/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")
+    webhook_url = os.environ.get("SLACK_WEBHOOK_URL", "https://hooks.slack.com/services/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")
+
     payload = {"text": message}
     
     response = requests.post(webhook_url, json=payload, timeout=10)
