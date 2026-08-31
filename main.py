@@ -133,8 +133,8 @@ def send_slack_notification(message):
 
 
 @functions_framework.http
-def weekly_rebalance_signal(request):
-    """Cloud Function entry point for generating and dispatching rebalance signals."""
+def run_rebalance_function(request):
+    """Cloud Function entry point matching the target configuration."""
     try:
         print("Fetching S&P 500 universe...")
         sp_df = get_sp500_universe()
